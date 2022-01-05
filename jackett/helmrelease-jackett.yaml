@@ -6,7 +6,7 @@ metadata:
 spec:
   chart:
     spec:
-      chart: bananaspliff/jackett
+      chart: jackett
       version: 0.1.0
       sourceRef:
         kind: HelmRepository
