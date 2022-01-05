@@ -7,10 +7,10 @@ spec:
   chart:
     spec:
       chart: traefik
-      version: 9.x
+      version: 10.x
       sourceRef:
         kind: HelmRepository
-        name: bitnami
+        name: traefik
         namespace: flux-system
   interval: 15m
   timeout: 5m
