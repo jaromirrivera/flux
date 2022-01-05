@@ -2,8 +2,8 @@
 apiVersion: source.toolkit.fluxcd.io/v1beta1
 kind: HelmRepository
 metadata:
-  name: geek-charts
+  name: podinfo
   namespace: flux-system
 spec:
   interval: 15m
-  url: https://bananaspliff.github.io/geek-charts
+  url: https://stefanprodan.github.io/podinfo
