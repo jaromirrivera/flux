@@ -3,6 +3,6 @@ kind: Kustomization
 resources:
 - gotk-components.yaml
 - gotk-sync.yaml
-- helmrepositories/helmrepository-podinfo.yaml
-- kustomizations/kustomization-podinfo.yaml
-- namespaces/namespace-podinfo.yaml
+- helmrepositories/*
+- kustomizations/*
+- namespaces/*
