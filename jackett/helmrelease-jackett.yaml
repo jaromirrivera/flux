@@ -7,7 +7,7 @@ spec:
   chart:
     spec:
       chart: bananaspliff/jackett
-      version: 6.x
+      version: 0.1.0
       sourceRef:
         kind: HelmRepository
         name: jackett
