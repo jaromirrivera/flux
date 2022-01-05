@@ -18,8 +18,7 @@ data:
     imageRegistry: ""
     ## E.g.
     ## imagePullSecrets:
-    ##   - myRegistryKeySecretName
-    <snip>
+    ##   - myRegistryKeySecretName <snip>
     prometheus:
         ## Prometheus Operator service monitors
         ##
