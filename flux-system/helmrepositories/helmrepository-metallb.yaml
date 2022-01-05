@@ -2,8 +2,8 @@
 apiVersion: source.toolkit.fluxcd.io/v1beta1
 kind: HelmRepository
 metadata:
-  name: bitnami
+  name: metallb
   namespace: flux-system
 spec:
   interval: 15m
-  url: https://charts.bitnami.com/bitnami
+  url: https://metallb.github.io/metallb
