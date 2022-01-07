@@ -454,7 +454,16 @@ data:
     #           - {{ template "traefik.name" . }}
     #       topologyKey: failure-domain.beta.kubernetes.io/zone
     nodeSelector: {}
-    tolerations: []
+    tolerations: 
+    - key: "CriticalAddonsOnly"
+      operator: "Exists"
+    - key: "node-role.kubernetes.io/control-plane"
+      operator: "Exists"
+      effect: "NoSchedule"
+    - key: "node-role.kubernetes.io/master"
+      operator: "Exists"
+      effect: "NoSchedule"
+
     
     # Pods can have priority.
     # Priority indicates the importance of a Pod relative to other Pods.
