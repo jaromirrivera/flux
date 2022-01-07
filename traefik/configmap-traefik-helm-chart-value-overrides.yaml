@@ -17,7 +17,7 @@ data:
     # Configure the deployment
     #
     deployment:
-      enabled: false
+      enabled: true
       # Can be either Deployment or DaemonSet
       kind: Deployment
       # Number of pods of the deployment (only applies when kind == Deployment)
