@@ -3,7 +3,7 @@ kind: ConfigMap
 metadata:
   creationTimestamp: null
   name: jackett-helm-chart-value-overrides
-  namespace: jackett
+  namespace: media
 data:
   values.yaml: |-
     replicaCount: 1
