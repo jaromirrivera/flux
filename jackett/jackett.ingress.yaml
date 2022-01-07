@@ -6,7 +6,7 @@ metadata:
   name: "jackett-ingress"
 spec:
   rules:
-  - host: "media.172.16.10.100.nip.io"
+  - host: "jackett.k3s.securait.local"
     http:
       paths:
         - backend:
@@ -18,4 +18,4 @@ spec:
           pathType: Prefix
   tls:
   - hosts:
-    - media.172.16.10.100.nip.io
+    - jackett.k3s.securait.local
