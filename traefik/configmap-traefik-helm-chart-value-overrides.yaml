@@ -31,10 +31,7 @@ data:
       # Additional deployment labels (e.g. for filtering deployment by custom labels)
       labels: {}
       # Additional pod annotations (e.g. for mesh injection or prometheus scraping)
-      podAnnotations: {
-        prometheus.io/port: "8082",
-        prometheus.io/scrape: "true"
-      }
+      podAnnotations: {}
       # Additional Pod labels (e.g. for filtering Pod by custom labels)
       podLabels: {}
       # Additional containers (e.g. for metric offloading sidecars)
