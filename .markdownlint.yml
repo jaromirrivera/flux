@@ -1,0 +1,10 @@
+---
+  line-length:
+    line_length: 100
+    tables: false
+    headings: false
+    code_blocks: false
+  list-marker-space: false
+  no-multiple-blanks:
+    maximum: 2
+  ul-start-left: false
