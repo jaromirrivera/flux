@@ -24,7 +24,7 @@ data:
         value: "1000"
 
     service:
-      type: LoadBalancer
+      type: ClusterIP
       port: 80
 
     volumes:

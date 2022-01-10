@@ -14,8 +14,9 @@ spec:
               name: "jackett"
               port:
                 number: 80
-          path: "/jackett"
+          path: "/"
           pathType: Prefix
   tls:
   - hosts:
     - jackett.k3s.securait.local
+
