@@ -11,7 +11,7 @@ data:
     image:
       repository: "gjeanmart/jackettvpn" # Special image to use Jackett over a VPN
       tag: "latest"
-      pullPolicy: IfNotPresent 
+      pullPolicy: IfNotPresent
 
     env:
       - name: VPN_ENABLED
