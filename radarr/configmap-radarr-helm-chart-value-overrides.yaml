@@ -31,6 +31,10 @@ data:
       - name: "nfs-data-volume"
         persistentVolumeClaim:
           claimName: "nfs-data-volume"
+      - name: movies
+        nfs:
+          server: datum.securait.local
+          path: /volume1/video/movies
 
     volumeMounts:
       - name: "nfs-data-volume"
@@ -39,7 +43,5 @@ data:
       - name: "nfs-data-volume"
         mountPath: "/downloads"
         subPath: "downloads/radarr"
-      - name: "nfs-data-volume"
+      - name: "movies"
         mountPath: "/movies"
-        subPath: "library/movies"
-

@@ -32,9 +32,9 @@ data:
         persistentVolumeClaim:
           claimName: "nfs-data-volume"
       - name: tv-shows
-          nfs:
-            server: datum.securait.local
-            path: /volume1/video/tv-shows
+        nfs:
+          server: datum.securait.local
+          path: /volume1/video/tv-shows
 
     volumeMounts:
       - name: "nfs-data-volume"
