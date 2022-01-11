@@ -45,4 +45,3 @@ data:
         subPath: "downloads/sonarr"
       - name: "tv-shows"
         mountPath: "/tv"
-
