@@ -70,7 +70,7 @@ data:
       # set to true to use pvc
       enabled: true
       # set to true to use you own pvc
-      existingClaim: pihole-pvc
+      existingClaim: pihole-data-volume
       annotations: {}
 
       accessModes:
