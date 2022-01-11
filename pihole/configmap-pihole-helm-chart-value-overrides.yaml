@@ -26,7 +26,7 @@ data:
     virtualHost: pihole.k3s.securait.local
 
     ingress:
-      enabled: false
+      enabled: trues
       annotations: {}
         # kubernetes.io/ingress.class: nginx
         # kubernetes.io/tls-acme: "true"
