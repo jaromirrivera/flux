@@ -1,0 +1,21 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: pihole
+  namespace: media
+spec:
+  chart:
+    spec:
+      chart: pihole
+      version: 0.1.0
+      sourceRef:
+        kind: HelmRepository
+        name: geek-charts
+        namespace: flux-system
+  interval: 15m
+  timeout: 5m
+  releaseName: pihole
+  valuesFrom:
+  - kind: ConfigMap
+    name: pihole-helm-chart-value-overrides
+    valuesKey: values.yaml # This is the default, but best to be explicit for clarity
