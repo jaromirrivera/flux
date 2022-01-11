@@ -40,6 +40,6 @@ data:
         mountPath: "/downloads"
         subPath: "downloads/radarr"
       - name: "nfs-data-volume"
-        mountPath: "/tv"
-        subPath: "library/tv"
+        mountPath: "/movies"
+        subPath: "library/movies"
 
