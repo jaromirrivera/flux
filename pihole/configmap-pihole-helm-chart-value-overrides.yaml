@@ -3,7 +3,7 @@ kind: ConfigMap
 metadata:
   creationTimestamp: null
   name: pihole-helm-chart-value-overrides
-  namespace: media
+  namespace: pihole
 data:
   values.yaml: |-
     replicaCount: 1
