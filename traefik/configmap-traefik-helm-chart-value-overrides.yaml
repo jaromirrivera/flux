@@ -12,7 +12,7 @@ data:
       # defaults to appVersion
       tag: ""
       pullPolicy: IfNotPresent
-    
+
     #
     # Configure the deployment
     #
@@ -63,7 +63,7 @@ data:
       # Additional imagePullSecrets
       imagePullSecrets: []
         # - name: myRegistryKeySecretName
-    
+
     # Pod disruption budget
     podDisruptionBudget:
       enabled: false
@@ -71,7 +71,7 @@ data:
       # maxUnavailable: 33%
       # minAvailable: 0
       # minAvailable: 25%
-    
+
     # Use ingressClass. Ignored if Traefik version < 2.3 / kubernetes < 1.18.x
     ingressClass:
       # true is not unit-testable yet, pending https://github.com/rancher/helm-unittest/pull/12
@@ -79,14 +79,14 @@ data:
       isDefaultClass: false
       # Use to force a networking.k8s.io API Version for certain CI/CD applications. E.g. "v1beta1"
       fallbackApiVersion: ""
-    
+
     # Activate Pilot integration
     pilot:
       enabled: false
       token: ""
       # Toggle Pilot Dashboard
       # dashboard: false
-    
+
     # Enable experimental features
     experimental:
       plugins:
@@ -101,7 +101,7 @@ data:
         # By default, Gateway would be created to the Namespace you are deploying Traefik to.
         # You may create that Gateway in another namespace, setting its name below:
         # namespace: default
-    
+
     # Create an IngressRoute for the dashboard
     ingressRoute:
       dashboard:
@@ -110,12 +110,12 @@ data:
         annotations: {}
         # Additional ingressRoute labels (e.g. for filtering IngressRoute by custom labels)
         labels: {}
-    
+
     rollingUpdate:
       maxUnavailable: 1
       maxSurge: 1
-    
-    
+
+
     #
     # Configure providers
     #
@@ -128,7 +128,7 @@ data:
         # labelSelector: environment=production,method=traefik
         namespaces: []
           # - "default"
-    
+
       kubernetesIngress:
         enabled: true
         allowExternalNameServices: false
@@ -141,7 +141,7 @@ data:
           # Published Kubernetes Service to copy status from. Format: namespace/servicename
           # By default this Traefik service
           # pathOverride: ""
-    
+
     #
     # Add volumes to the traefik pod. The volume name will be passed to tpl.
     # This can be used to mount a cert pair or a configmap that holds a config.toml file.
@@ -150,20 +150,25 @@ data:
     # - "--providers.file.filename=/config/dynamic.toml"
     # - "--ping"
     # - "--ping.entrypoint=web"
-    volumes: []
+    volumes:
+      - name: ssl
+        secret:
+          secretName: wildcard-k3s.securait.local
     # - name: public-cert
     #   mountPath: "/certs"
     #   type: secret
     # - name: '{{ printf "%s-configs" .Release.Name }}'
     #   mountPath: "/config"
     #   type: configMap
-    
+
     # Additional volumeMounts to add to the Traefik container
-    additionalVolumeMounts: []
+    additionalVolumeMounts:
+      - name: ssl
+        mountPath: /ssl
       # For instance when using a logshipper for access logs
       # - name: traefik-logs
       #   mountPath: /var/log/traefik
-    
+
     # Logs
     # https://docs.traefik.io/observability/logs/
     logs:
@@ -205,7 +210,7 @@ data:
               # User-Agent: redact
               # Authorization: drop
               # Content-Type: keep
-    
+
     metrics:
       # datadog:
       #   address: 127.0.0.1:8125
@@ -216,11 +221,11 @@ data:
         entryPoint: metrics
       # statsd:
       #   address: localhost:8125
-    
+
     globalArguments:
       - "--global.checknewversion"
       - "--global.sendanonymoususage"
-    
+
     #
     # Configure Traefik static configuration
     # Additional arguments to be passed at Traefik's binary
@@ -229,7 +234,7 @@ data:
     additionalArguments: []
     #  - "--providers.kubernetesingress.ingressclass=traefik-internal"
     #  - "--log.level=DEBUG"
-    
+
     # Environment variables to be passed to Traefik's binary
     env: []
     # - name: SOME_VAR
@@ -244,13 +249,13 @@ data:
     #     secretKeyRef:
     #       name: secret-name
     #       key: secret-key
-    
+
     envFrom: []
     # - configMapRef:
     #     name: config-map-name
     # - secretRef:
     #     name: secret-name
-    
+
     # Configure ports
     ports:
       # The name of this one can't be changed as it is used for the readiness and
@@ -265,11 +270,11 @@ data:
         # to set this value if you need traefik to listen on specific interface
         # only.
         # hostIP: 192.168.100.10
-    
+
         # Override the liveness/readiness port. This is useful to integrate traefik
         # with an external Load Balancer that performs healthchecks.
         # healthchecksPort: 9000
-    
+
         # Defines whether the port is exposed if service.type is LoadBalancer or
         # NodePort.
         #
@@ -329,7 +334,7 @@ data:
         exposedPort: 9100
         # The port protocol (TCP/UDP)
         protocol: TCP
-    
+
     # TLS Options are created as TLSOption CRDs
     # https://doc.traefik.io/traefik/https/tls/#tls-options
     # Example:
@@ -342,7 +347,7 @@ data:
     #       - CurveP521
     #       - CurveP384
     tlsOptions: {}
-    
+
     # Options for the main traefik service, where the entrypoints traffic comes
     # from.
     service:
@@ -369,7 +374,7 @@ data:
         # - 1.2.3.4
       # One of SingleStack, PreferDualStack, or RequireDualStack.
       # ipFamilyPolicy: SingleStack
-    
+
     ## Create HorizontalPodAutoscaler object.
     ##
     autoscaling:
@@ -385,7 +390,7 @@ data:
     #     resource:
     #       name: memory
     #       targetAverageUtilization: 60
-    
+
     # Enable persistence using Persistent Volume Claims
     # ref: http://kubernetes.io/docs/user-guide/persistent-volumes/
     # After the pvc has been mounted, add the configs into traefik by using the `additionalArguments`     list below, eg:
@@ -402,34 +407,34 @@ data:
       path: /data
       annotations: {}
       # subPath: "" # only mount a subpath of the Volume into the pod
-    
+
     # If hostNetwork is true, runs traefik in the host network namespace
     # To prevent unschedulabel pods due to port collisions, if hostNetwork=true
     # and replicas>1, a pod anti-affinity is recommended and will be set if the
     # affinity is left as default.
     hostNetwork: true
-    
+
     # Whether Role Based Access Control objects like roles and rolebindings should be created
     rbac:
       enabled: true
-    
+
       # If set to false, installs ClusterRole and ClusterRoleBinding so Traefik can be used across    namespaces.
       # If set to true, installs namespace-specific Role and RoleBinding and requires provider    configuration be set to that same namespace
       namespaced: false
-    
+
     # Enable to create a PodSecurityPolicy and assign it to the Service Account via RoleBinding or    ClusterRoleBinding
     podSecurityPolicy:
       enabled: false
-    
+
     # The service account the pods will use to interact with the Kubernetes API
     serviceAccount:
       # If set, an existing service account is used
       # If not set, a service account is created automatically using the fullname template
       name: ""
-    
+
     # Additional serviceAccount annotations (e.g. for oidc authentication)
     serviceAccountAnnotations: {}
-    
+
     resources: {}
       # requests:
       #   cpu: "100m"
@@ -451,7 +456,7 @@ data:
     #           - {{ template "traefik.name" . }}
     #       topologyKey: failure-domain.beta.kubernetes.io/zone
     nodeSelector: {}
-    tolerations: 
+    tolerations:
     - key: "CriticalAddonsOnly"
       operator: "Exists"
     - key: "node-role.kubernetes.io/control-plane"
@@ -461,11 +466,11 @@ data:
       operator: "Exists"
       effect: "NoSchedule"
 
-    
+
     # Pods can have priority.
     # Priority indicates the importance of a Pod relative to other Pods.
     priorityClassName: ""
-    
+
     # Set the container security context
     # To run the container with ports below 1024 this will need to be adjust to run as root
     securityContext:
@@ -475,7 +480,6 @@ data:
       runAsGroup: 65532
       runAsNonRoot: true
       runAsUser: 65532
-    
+
     podSecurityContext:
       fsGroup: 65532
-    
