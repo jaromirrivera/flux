@@ -1,0 +1,61 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  name: cert-manager-helm-chart-value-overrides
+  namespace: cert-manager
+data:
+  values.yaml: |-
+    # Default values for cert-manager.
+    # This is a YAML-formatted file.
+    # Declare variables to be passed into your templates.
+    global:
+      ## Reference to one or more secrets to be used when pulling images
+      ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
+      ##
+      imagePullSecrets: []
+      # - name: "image-pull-secret"
+
+      # Optional priority class to be used for the cert-manager pods
+      priorityClassName: ""
+      rbac:
+        create: true
+
+      podSecurityPolicy:
+        enabled: false
+        useAppArmor: true
+
+      # Set the verbosity of cert-manager. Range of 0 - 6 with 6 being the most verbose.
+      logLevel: 2
+
+      leaderElection:
+        # Override the namespace used to store the ConfigMap for leader election
+        namespace: "kube-system"
+
+        # The duration that non-leader candidates will wait after observing a
+        # leadership renewal until attempting to acquire leadership of a led but
+        # unrenewed leader slot. This is effectively the maximum duration that a
+        # leader can be stopped before it is replaced by another candidate.
+        # leaseDuration: 60s
+
+        # The interval between attempts by the acting master to renew a leadership
+        # slot before it stops leading. This must be less than or equal to the
+        # lease duration.
+        # renewDeadline: 40s
+
+        # The duration the clients should wait between attempting acquisition and
+        # renewal of a leadership.
+        # retryPeriod: 15s
+
+    installCRDs: true
+
+    replicaCount: 1
+
+    strategy: {}
+      # type: RollingUpdate
+      # rollingUpdate:
+      #   maxSurge: 0
+      #   maxUnavailable: 1
+
+    # Comma separated list of feature gates that should be enabled on the
+    # controller pod.

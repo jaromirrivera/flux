@@ -1,2 +1,3 @@
 .DS_Store
 .markdownlint.yml
+cert-manager/cert-manager-custom-ca.secret.yaml
