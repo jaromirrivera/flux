@@ -4,6 +4,10 @@ kind: Ingress
 metadata:
   namespace: "media"
   name: "sonarr-ingress"
+  annotations:
+    kubernetes.io/ingress.class: "traefik"
+    cert-manager.io/cluster-issuer: ca-issuer
+    traefik.ingress.kubernetes.io/router.tls: "true"
 spec:
   rules:
   - host: "sonarr.k3s.securait.local"
