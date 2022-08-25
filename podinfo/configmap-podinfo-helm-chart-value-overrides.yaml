@@ -6,7 +6,7 @@ metadata:
   namespace: podinfo
 data:
   values.yaml: |-
-    # Default values for podinfo.
+    # Default values for podinfo. Test.
 
     replicaCount: 1
     logLevel: info
